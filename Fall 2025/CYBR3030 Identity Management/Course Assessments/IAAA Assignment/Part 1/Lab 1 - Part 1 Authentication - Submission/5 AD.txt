@@ -1,0 +1,45 @@
+
+Host Name:                 ARR01
+OS Name:                   Microsoft Windows Server 2019 Standard
+OS Version:                10.0.17763 N/A Build 17763
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Primary Domain Controller
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   
+Product ID:                00429-00119-55976-AA460
+Original Install Date:     9/23/2025, 11:30:55 PM
+System Boot Time:          9/24/2025, 8:54:01 AM
+System Manufacturer:       VMware, Inc.
+System Model:              VMware20,1
+System Type:               x64-based PC
+Processor(s):              2 Processor(s) Installed.
+                           [01]: Intel64 Family 6 Model 142 Stepping 12 GenuineIntel ~2304 Mhz
+                           [02]: Intel64 Family 6 Model 142 Stepping 12 GenuineIntel ~2304 Mhz
+BIOS Version:              VMware, Inc. VMW201.00V.24006586.B64.2406042154, 6/4/2024
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume2
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC-08:00) Pacific Time (US & Canada)
+Total Physical Memory:     4,095 MB
+Available Physical Memory: 2,205 MB
+Virtual Memory: Max Size:  5,503 MB
+Virtual Memory: Available: 3,702 MB
+Virtual Memory: In Use:    1,801 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    Arr.local
+Logon Server:              \\ARR01
+Hotfix(s):                 3 Hotfix(s) Installed.
+                           [01]: KB5020627
+                           [02]: KB5019966
+                           [03]: KB5020374
+Network Card(s):           1 NIC(s) Installed.
+                           [01]: Intel(R) 82574L Gigabit Network Connection
+                                 Connection Name: Ethernet0
+                                 DHCP Enabled:    No
+                                 IP address(es)
+                                 [01]: 192.168.1.100
+                                 [02]: fe80::269b:9d89:4abf:6e3d
+Hyper-V Requirements:      A hypervisor has been detected. Features required for Hyper-V will not be displayed.
