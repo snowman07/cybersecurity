@@ -61,7 +61,7 @@ Submit a PDF document containing screenshots and explanations, including:
    - Click the version. Agree to the terms and conditon.
    - You can now download the installer and use the executable file to install VMware Workstation Pro in your machine.
 
-2. Set-up Cisco Modelling Lab (CML) 
+2. Setup for CML and FortiManager 
   > `Student_CML_FortiManager2_OVA` folder is 1.26 GB <br>
   > `CML_Student_OVA` folder is 75.7 GB in total --> in video tut, this is Student_CML_Master
 
@@ -86,3 +86,18 @@ Submit a PDF document containing screenshots and explanations, including:
       - "Network Adapter" should be set to "Custom: VMnet2". Also check "Connect at power on" under Device status.
          ![CML01 - Network Adapter](C:\GitHub\cybersecurity\Fall 2025\CYBR3010 Cybersecurity Foundations\Assignments\1 Build Your Virtual Network Lab\screenshots)
       - Click OK
+
+
+3. Power on the new VM
+   - For FortiManger VM environment:
+       - Click "Power on this virtual machine"
+       - Wait for couple minutes til it reach the "FortiManager login", leave it like that, just keep the image open.
+   - For CML VM environment:
+       - Click "Power on this virtual machine"
+       - You will see an IP address to access CML UI. Note that it is different for everybody depending on your setup `Access the CML UI from https://192.168.202.136/`
+       - Open a browser and paste the ip address. If the browser is not allowing it, click the "Advaced" and proceed.
+       - On the login page, "`admin`" is the username and "`P@ssw0rd25`" is the password.
+       - 
+         
+     
+
