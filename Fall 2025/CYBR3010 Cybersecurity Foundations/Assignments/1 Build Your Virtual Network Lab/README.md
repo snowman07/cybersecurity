@@ -88,7 +88,7 @@ Submit a PDF document containing screenshots and explanations, including:
       - Click OK
 
 
-3. Power on the new VM
+3. Power on the new VM and explore CML
    - For FortiManger VM environment:
        - Click "Power on this virtual machine"
        - Wait for couple minutes til it reach the "FortiManager login", leave it like that, just keep the image open.
@@ -98,6 +98,7 @@ Submit a PDF document containing screenshots and explanations, including:
        - Open a browser and paste the ip address. If the browser is not allowing it, click the "Advaced" and proceed.
        - On the login page, "`admin`" is the username and "`P@ssw0rd25`" is the password.
        - 
-         
-     
+
+4. Building Your First Lab in CML
+   - On the CML screen, Click "Add"
 
