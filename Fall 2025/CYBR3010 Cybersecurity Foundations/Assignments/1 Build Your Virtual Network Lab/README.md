@@ -41,13 +41,29 @@ Submit a PDF document containing screenshots and explanations, including:
 
 ------
 
+# Introduction
+
+This lab is an interconnected network configuration designed through MS Visio and built within Cisco Modelling Lab (CML) environment. Its purpose is to provide reliable communication/connectivity between different network resources.
+
+    'Software Used'
+    - VMware Workstation Pro
+    - Cisco Modelling Lab (CML)
+    - MS Visio
+
+
+# Network Diagram
+
+This is the network layout which consists of 4 virtual machines running with different operating systems (Kali Linux, Windows 10, Windows 11, Windows 7), a network switch, and a firewall connected via the internet.
+
+--- screenshot here from visio
+
+
+# Device Status Proof
+
+
+
+
 # Rebuild Guide
-
-'Software Used'
-- VMware Workstation Pro
-- Cisco Modelling Lab (CML)
--
-
 
 1. Install VMware Workstation Pro:
    - To get the installer, go to https://support.broadcom.com/
@@ -61,44 +77,66 @@ Submit a PDF document containing screenshots and explanations, including:
    - Click the version. Agree to the terms and conditon.
    - You can now download the installer and use the executable file to install VMware Workstation Pro in your machine.
 
-2. Setup for CML and FortiManager 
+2. Download the images needed to setup CML and FortiManager 
   > `Student_CML_FortiManager2_OVA` folder is 1.26 GB <br>
   > `CML_Student_OVA` folder is 75.7 GB in total --> in video tut, this is Student_CML_Master
 
-  - For this assignment, there are 2 folders needed. One for FortiManager and one for CML Student. Download both folders and unzip using 7zip.
-  - Inside the folder, there are images where you need to run/click to open it in VMware Workstation Pro. 
-    - For CML Student (main CML):
-      - Click .ovf file (Open Virtualization Format) 
-      - Enter a name of the new virtual machine. `CML01`
-      - Browse for the storage path of the new virtual machine
-      - Click "Import". This process will take some time to finish.
-      - Once done, you will see VMware Workstation. Click "Edit virtual machine settings"
-      - "Network Adapter" should be set to "NAT" (give the device internet access and IP address thru closed networks through desktop networks which will not exposed to the outside which is good)
-      - "Network Adapter 2" should be set to "Custom: VMnet2" (initially set to Bridged Automatic which means its connected to actual network. Custom: VMNet2 is a closed environment meaning it will not be interfering with any other network outside.)
-         ![CML01 - Network Adapter](C:\GitHub\cybersecurity\Fall 2025\CYBR3010 Cybersecurity Foundations\Assignments\1 Build Your Virtual Network Lab\screenshots)
-      - Click OK
-    - For CML FortiManager (required for firewall licensing):
-      - Click .ovf file (Open Virtualization Format)
-      - Enter a name of the new virtual machine. `FortiManager01`
-      - Browse for the storage path of the new virtual machine
-      - Click "Import"
-      - Once done, you will see VMware Workstation. Click "Edit virtual machine settings"
-      - "Network Adapter" should be set to "Custom: VMnet2". Also check "Connect at power on" under Device status.
-         ![CML01 - Network Adapter](C:\GitHub\cybersecurity\Fall 2025\CYBR3010 Cybersecurity Foundations\Assignments\1 Build Your Virtual Network Lab\screenshots)
-      - Click OK
-
+  - For this assignment, there are 2 folders needed to download and unzip. One folder is for FortiManager and one folder is for CML Student.
+    - To download and unzip FortiManager folder:
+      - Go to Brightspace where FortiManager folder is uploaded.
+      - Click "Download".
+      - Keep the "File name" and "Save as type", then choose the location where you want to save the unzipped folder.
+      - Click "Save"
+      - Go to the location where you saved the unzipped folder
+      - Right click the folder
+      - Click "Extract All"
+      - Choose a location where you want to save the extracted/zipped folder
+      - Click "Extract"
+    - To download and unzip (using 7zip) CML Student folder:
+      - Go to Brightspace where CML Student folder is uploaded.
+      - Notice that there are 13 OVA (Open Virtual Appliance) files, download those 13 files one-by-one.
+      - Keep the "File name" and "Save as type", then choose the location where you want to save the OVA files.
+      - Click "Save"
+      - If your machine do not have 7zip File Manager, download the app.
+      - Open 7zip File Manager app
+      - Where you see a folder icon, paste the location of those 13 OVA files
+      - Highlight the first (.001) OVA file
+      - Click "Extract"
+      - Choose a location where you want to extract.
+      - Click "OK". Depending on your machine, the extract process takes some time.
+        
+    - When both FortiManager folder and CML Student folder are extracted, there are images you need to run/click to open it in VMware Workstation Pro. 
+      - For CML Student folder (main CML):
+        - Click .ovf (Open Virtualization Format) file  
+        - Enter a name of the new virtual machine. `CML01`
+        - Browse for the storage path of the new virtual machine
+        - Click "Import". This process will take some time to finish.
+        - Once done, you will see VMware Workstation. Click "Edit virtual machine settings"
+        - "Network Adapter" should be set to "NAT" (give the device internet access and IP address thru closed networks through desktop networks which will not exposed to the outside which is good)
+        - "Network Adapter 2" should be set to "Custom: VMnet2" (initially set to Bridged Automatic which means its connected to actual network where it acquire an IP address and connect to your real network that is something not desirable. Custom: VMNet2 is a closed environment meaning it will not be interfering with any other network outside.)
+           ![CML01 - Network Adapter](C:\GitHub\cybersecurity\Fall 2025\CYBR3010 Cybersecurity Foundations\Assignments\1 Build Your Virtual Network Lab\screenshots)
+        - Click OK
+      - For CML FortiManager (required for firewall licensing):
+        - Click .ovf file (Open Virtualization Format)
+        - Enter a name of the new virtual machine. `FortiManager01`
+        - Browse for the storage path of the new virtual machine
+        - Click "Import"
+        - Once done, you will see VMware Workstation. Click "Edit virtual machine settings"
+        - "Network Adapter" should be set to "Custom: VMnet2". Also check "Connect at power on" under Device status.
+           ![CML01 - Network Adapter](C:\GitHub\cybersecurity\Fall 2025\CYBR3010 Cybersecurity Foundations\Assignments\1 Build Your Virtual Network Lab\screenshots)
+        - Click OK
 
 3. Power on the new VM and explore CML
-   - For FortiManger VM environment:
-       - Click "Power on this virtual machine"
-       - Wait for couple minutes til it reach the "FortiManager login", leave it like that, just keep the image open.
-   - For CML VM environment:
-       - Click "Power on this virtual machine"
-       - You will see an IP address to access CML UI. Note that it is different for everybody depending on your setup `Access the CML UI from https://192.168.202.136/`
-       - Open a browser and paste the ip address. If the browser is not allowing it, click the "Advaced" and proceed.
-       - On the login page, "`admin`" is the username and "`P@ssw0rd25`" is the password.
-       - 
-
-4. Building Your First Lab in CML
+  - For FortiManger VM environment:
+    - Click "Power on this virtual machine"
+    - Wait for couple minutes til it reach the "FortiManager login", leave it like that, just keep the image open.
+  - For CML VM environment:
+    - Click "Power on this virtual machine"
+    - You will see an IP address to access CML UI. Note that it is different for everybody depending on your setup `Access the CML UI from https://192.168.202.136/`
+    - Open a browser and paste the ip address. If the browser is not allowing it, click the "Advaced" and proceed.
+    - On the login page, "`admin`" is the username and "`P@ssw0rd25`" is the password.
+    - Right off the bat, you will see your CML dashboard where you can add projects/lab. Below the screen, you will see the health data which includes the CPU, Memory, and Disk, as well as the licensing.
+      
+4. Building the Lab in CML
    - On the CML screen, Click "Add"
 
