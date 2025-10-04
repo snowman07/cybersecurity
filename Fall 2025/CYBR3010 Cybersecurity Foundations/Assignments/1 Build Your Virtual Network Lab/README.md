@@ -53,7 +53,7 @@ This lab is an interconnected network configuration designed through MS Visio an
 
 # Network Diagram
 
-This is the network layout which consists of 4 virtual machines running with different operating systems (Kali Linux, Windows 10, Windows 11, Windows 7), a network switch, and a firewall connected via the internet.
+This is the network layout which consists of 4 virtual client machines running on different operating systems (Kali Linux, Windows 10, Windows 11, Windows 7), a network switch, and a firewall connected via the internet.
 
 --- screenshot here from visio
 
