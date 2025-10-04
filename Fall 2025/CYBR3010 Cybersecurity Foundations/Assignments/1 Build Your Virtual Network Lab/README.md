@@ -58,7 +58,7 @@ This is the network layout which consists of 4 virtual machines running with dif
 --- screenshot here from visio
 
 
-# Device Status Proof
+# Device Status Proof (refer to video 03 Building Your First Lab Part 1)
 
 
 
@@ -74,7 +74,7 @@ This is the network layout which consists of 4 virtual machines running with dif
    - On the left pane, click "My Downloads"
    - You can either search VMware Workstation Pro or where you see "Free Software Downloads", click "HERE"
    - Click "VMware Workstation Pro". You will then see an option to download different versions of Windows and Linux.
-   - Click the version. Agree to the terms and conditon.
+   - Click the version depending on the machine you are using. Agree to the terms and conditions.
    - You can now download the installer and use the executable file to install VMware Workstation Pro in your machine.
 
 2. Download the images needed to setup CML and FortiManager 
@@ -138,5 +138,32 @@ This is the network layout which consists of 4 virtual machines running with dif
     - Right off the bat, you will see your CML dashboard where you can add projects/lab. Below the screen, you will see the health data which includes the CPU, Memory, and Disk, as well as the licensing.
       
 4. Building the Lab in CML
-   - On the CML screen, Click "Add"
+  - To add Nodes (network devices)
+    - On the CML screen, Click "Add"
+    - You will then proceed to the lab dashboard environment where you can see the workbench consisting of different tools to complete the lab.
+    - At the top of the screen where you see a dropdown icon, rename the "Lab Title". "Lab Description" is optional.
+    - The most important tools in the workbench is the "Add Nodes" where you can add network resources such as firewall, switch, router, desktop machine, etc. Depending on the requirement, drag and drop a node into your lab environment.
+  
+  - To check and edit the details of the Nodes (network devices)    
+    - Click the node to see the details on the right side of the screen.
+    - On the right side of the screen, you can see "Settings" tab where you can change the "Node Name", "Connectivity" tab, "Config" tab, and "Interfaces" tab.
+    - `TIP: Before starting the nodes/devices, it is recommended to first setup the nodes/devices properly.`
+
+  - To connect each Nodes (network devices)
+    - If you drag and drop all the nodes you need and it is time for you to make a connection within each nodes, right click the node and click "Add Link".
+    - Choose a port number where you want to connect from "Source Interface" to "Target Interface".
+    - Click "Create Link".
+
+  - To start the Node (network devices)
+    - When connection is done, right click the node and click "Start" (It is advisable to start the node one at a time to avoid stressing the machine because starting the nodes at the same time requires heavy amount of CPU and RAM. You know the node successfully started if you notice a green check icon in the node)
+
+  - To check the status of nodes/devices you started
+    - Right click the node and click "Console" for switches and routers, and click "Open Console".
+    - Otherwise, click "VNC" for client desktop machine and click "Open VNC".
+
+  - To delete the nodes/devices that you started
+    - Right click the node then click "Stop".
+    - Right click the node again and click "Wipe" (Wipe means going back to the original state with no configuration).
+    - Click "Confirm"
+    - Another right click on the node and click "Delete".
 
