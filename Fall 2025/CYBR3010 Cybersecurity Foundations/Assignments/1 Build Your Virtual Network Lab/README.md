@@ -53,7 +53,7 @@ This lab is an interconnected network configuration designed through MS Visio an
 
 # Network Diagram
 
-This is the network layout which consists of 4 virtual client machines running on different operating systems (Kali Linux, Windows 10, Windows 11, Windows 7), a network switch, and a firewall connected via the internet.
+This is the network layout which consists of 4 virtual client machines running on different operating systems (Kali Linux, Windows 10, Windows 11, Windows 7), a network switch, and a firewall connected to the internet via NAT network adapter.
 
 --- screenshot here from visio
 
@@ -94,9 +94,9 @@ This is the network layout which consists of 4 virtual client machines running o
       - Click "Extract"
     - To download and unzip (using 7zip) CML Student folder:
       - Go to Brightspace where CML Student folder is uploaded.
-      - Notice that there are 13 OVA (Open Virtual Appliance) files, download those 13 files one-by-one.
+      - Notice that there are 13 OVA (Open Virtual Appliance) files, download those 13 files one-by-one (depending on your internet connection, this would take time).
       - Keep the "File name" and "Save as type", then choose the location where you want to save the OVA files.
-      - Click "Save"
+      - Click "Save". Repeat until you get all 13 OVA files.
       - If your machine do not have 7zip File Manager, download the app.
       - Open 7zip File Manager app
       - Where you see a folder icon, paste the location of those 13 OVA files
