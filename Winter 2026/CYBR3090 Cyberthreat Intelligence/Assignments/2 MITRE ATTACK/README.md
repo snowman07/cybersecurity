@@ -17,6 +17,8 @@
     - [2.5.1 Operation Cobalt Kitty](#251-operation-cobalt-kitty)
     - [2.5.2 Covid-19 Espionage](#252-covid-19-espionage)
   - [2.6 MITRE ATT\&CK mapping](#26-mitre-attck-mapping)
+- [Mapping APT29 and APT on MITRE ATT\&CK Navigator](#mapping-apt29-and-apt-on-mitre-attck-navigator)
+- [Useful Links](#useful-links)
 - [References](#references)
 
 <!-- /TOC -->
@@ -79,6 +81,14 @@ ATTA&CK - Adversarial, Tactics, Techniques & Common Knowledge
 
 ### 2.6 MITRE ATT&CK mapping
 
+
+## Mapping APT29 and APT on MITRE ATT&CK Navigator 
+
+## Useful Links
+
+[Introduction To The MITRE ATT&CK Framework](https://www.youtube.com/watch?v=LCec9K0aAkM)
+
+[Mapping APT TTPs With MITRE ATT&CK Navigator](https://www.youtube.com/watch?v=hN_r3JW6xsY)
 
 
 
