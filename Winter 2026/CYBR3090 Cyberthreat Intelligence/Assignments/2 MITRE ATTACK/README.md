@@ -19,7 +19,6 @@
   - [2.6 MITRE ATT\&CK mapping](#26-mitre-attck-mapping)
 - [3 Mapping several adversaries (APT28, APT29, APT39) on MITRE ATT\&CK Navigator](#3-mapping-several-adversaries-apt28-apt29-apt39-on-mitre-attck-navigator)
   - [3.1 APT28 - create layer, set color coding, and insert scoring](#31-apt28---create-layer-set-color-coding-and-insert-scoring)
-- [*TTP of APT28 group.*](#ttp-of-apt28-group)
   - [3.2 Combining all APT group into single layer](#32-combining-all-apt-group-into-single-layer)
 - [Useful Links](#useful-links)
 - [References](#references)
@@ -110,6 +109,7 @@
   *Search APT groups.*
       
   -  Under "Threat Groups", click "select" beside APT28. Notice that the techniques will be highlighted.
+  
   ![Select APT group.](./screenshot/3.3%20Select%20APT%20group.jpg)
   
   *Select APT group.*
@@ -146,7 +146,7 @@
   
   *Create new layer*
 
-  - Repeat the process to `Search APT group` until `Scoring of APT group`.
+  - Repeat the process to `Create new layer` until `Scoring of APT group`.
   - At this point, there should be 3 layers, namely; APT28, APT29, and APT39.
   - 
   - For TTP of the three APT groups, below are the SVG file downloaded for APT28, APT29, and APT39 respectively.
@@ -154,7 +154,11 @@
   ![TTP of APT28 group.](./screenshot/3.8%20TTP%20of%20APT28%20group..svg)
     
   *TTP of APT28 group.*
-  - 
+
+  ![TTP of APT29 group](./screenshot/3.10%20TTP%20of%20APT29%20group.svg)
+
+  *TTP of APT29 group.*
+
 
 ### 3.2 Combining all APT group into single layer
 Use case
