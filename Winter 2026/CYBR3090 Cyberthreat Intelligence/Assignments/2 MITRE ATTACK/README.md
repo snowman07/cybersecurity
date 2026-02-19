@@ -132,7 +132,7 @@
       
   *Set color value.*
   
-    >`Note:` In terms of putting score to the color coding, since we are comparing 3 APT groups; `1 = there is only one TTP present in all APT groups`, `2 = there are two TTP present in all APT groups`, `3 = these are the common/similar TTP in all APT groups`.
+    > Note: In terms of putting score to the color coding, since we are comparing 3 APT groups; `1 = there is only one TTP present in all APT groups`, `2 = there are two TTP present in all APT groups`, `3 = these are the common/similar TTP in all APT groups`.
 
   - To insert the score, go to "Technique Controls", click scoring icon, and put 1. Notice that TTP are now in color red.
     
@@ -148,8 +148,13 @@
 
   - Repeat the process to `Create new layer` until `Scoring of APT group`.
   - At this point, there should be 3 layers, namely; APT28, APT29, and APT39.
-  - 
-  - For TTP of the three APT groups, below are the SVG file downloaded for APT28, APT29, and APT39 respectively.
+  
+  ![Three layers of APT groups.](./screenshot/3.12%20Layers%20of%20APT%20group.jpg)
+
+  *Three layers of APT groups.*
+
+  - For TTP of the three APT groups, below are the SVG file downloaded for APT28, APT29, and APT39 respectively. To download SVG/excel file, go to "Layer Controls" and click export icon.
+   > Excel file for TTP of the three APT groups are available in this repo.
 
   ![TTP of APT28 group.](./screenshot/3.8%20TTP%20of%20APT28%20group..svg)
     
@@ -158,6 +163,10 @@
   ![TTP of APT29 group](./screenshot/3.10%20TTP%20of%20APT29%20group.svg)
 
   *TTP of APT29 group.*
+
+  ![TTP of APT39 group](./screenshot/3.11%20TTP%20of%20APT39%20group.svg)
+
+  *TTP of APT39 group*
 
 
 ### 3.2 Combining all APT group into single layer
