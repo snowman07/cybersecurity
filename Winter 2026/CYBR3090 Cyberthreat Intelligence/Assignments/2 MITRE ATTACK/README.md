@@ -17,7 +17,7 @@
     - [2.5.1 Operation Cobalt Kitty](#251-operation-cobalt-kitty)
     - [2.5.2 Covid-19 Espionage](#252-covid-19-espionage)
   - [2.6 MITRE ATT\&CK mapping](#26-mitre-attck-mapping)
-- [3 Mapping several adversaries (APT28, APT29, APT39) on MITRE ATT\&CK Navigator](#3-mapping-several-adversaries-apt28-apt29-apt39-on-mitre-attck-navigator)
+- [3 Mapping multiple adversaries (APT28, APT29, APT39) on MITRE ATT\&CK Navigator](#3-mapping-multiple-adversaries-apt28-apt29-apt39-on-mitre-attck-navigator)
   - [3.1 APT groups - create layer, set color coding, and insert scoring](#31-apt-groups---create-layer-set-color-coding-and-insert-scoring)
   - [3.2 Combining all APT group into single layer](#32-combining-all-apt-group-into-single-layer)
 - [Useful Links](#useful-links)
@@ -86,7 +86,7 @@
 ### 2.6 MITRE ATT&CK mapping
 
 
-## 3 Mapping several adversaries (APT28, APT29, APT39) on MITRE ATT&CK Navigator 
+## 3 Mapping multiple adversaries (APT28, APT29, APT39) on MITRE ATT&CK Navigator 
 
   >When planning an adversarial emulation campaign or a comprehensive red team operation, we use the TTP (Tactic, Technique, Procedure) of several adversaries or APT (Advance Persistent Threat) groups and combine them in order to come up with a campaign that is hollistic and encompassing all of the TTPs of more than one APT group.
 
@@ -173,18 +173,42 @@
 
 
 ### 3.2 Combining all APT group into single layer
-Use case
-1. See the collective TTPs of all APT groups in one layer
-2. See the commonalities/similarities of what TTPs the groups share between them (in relation to color coding and scoring). The combined layer that has cumulative score of more than one means they occur more than once amongst APT group 
+
+Use case for combining the three APT groups:
+1. See the collective TTPs of all APT groups in one layer.
+2. See the commonalities/similarities of what TTPs the groups share between them (in relation to color coding and scoring). The combined layer that has cumulative score of more than one means they occur more than once amongst APT group.
+
+- Add a separate layer by clicking the plus icon.
+- Click "Create Layer from Other Layers".
+
+  ![Create layer from other layers](./screenshot/3.13%20Create%20layer%20from%20othe%20layers.jpg)
+
+  *Create layer from other layers.*
+
+- For the "domain", choose the MITRE ATT&CK version used from the previous layer. Most likely, it is "Enterprise ATT&CK MITRE ATT&CK v18".
+  
+  ![Choosing the version.](./screenshot/3.14%20Choosing%20the%20version.jpg)
+
+  *Choosing the version.*
+
+- For "score expression", enter "a+b+c". This expression is based from the 3 previous layers of APT groups.
+  
+  ![Score expression base from previous 3 layers.](./screenshot/3.15%20Score%20expression%20base%20from%20previous%203%20layers.jpg)
+
+  *Score expression base from previous 3 layers.*
+
+- Scroll down and click "Create layer".
+- Below is the SVG file of the combined TTP.
+  
+  ![TTP of combined layer of 3 APT groups](./screenshot/3.16%20ttp%20of%20combined%20layer%20of%203%20APT%20groups.svg)
+
+  *TTP of combined layer of 3 APT groups.*
 
 ## Useful Links
 
 [Introduction To The MITRE ATT&CK Framework](https://www.youtube.com/watch?v=LCec9K0aAkM)
 
 [Mapping APT TTPs With MITRE ATT&CK Navigator](https://www.youtube.com/watch?v=hN_r3JW6xsY)
-
-
-
 
 ## References
 Cyber Threat Intelligence (CTI): Definition, Types & Process. (n.d.). Retrieved from BlueVoyant: https://www.bluevoyant.com/knowledge-center/cyber-threat-intelligence-cti-definition-types-process
