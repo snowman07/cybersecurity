@@ -18,7 +18,7 @@
     - [2.5.2 Covid-19 Espionage](#252-covid-19-espionage)
   - [2.6 MITRE ATT\&CK mapping](#26-mitre-attck-mapping)
 - [3 Mapping several adversaries (APT28, APT29, APT39) on MITRE ATT\&CK Navigator](#3-mapping-several-adversaries-apt28-apt29-apt39-on-mitre-attck-navigator)
-  - [3.1 APT28 - create layer, set color coding, and insert scoring](#31-apt28---create-layer-set-color-coding-and-insert-scoring)
+  - [3.1 APT groups - create layer, set color coding, and insert scoring](#31-apt-groups---create-layer-set-color-coding-and-insert-scoring)
   - [3.2 Combining all APT group into single layer](#32-combining-all-apt-group-into-single-layer)
 - [Useful Links](#useful-links)
 - [References](#references)
@@ -90,7 +90,7 @@
 
   >When planning an adversarial emulation campaign or a comprehensive red team operation, we use the TTP (Tactic, Technique, Procedure) of several adversaries or APT (Advance Persistent Threat) groups and combine them in order to come up with a campaign that is hollistic and encompassing all of the TTPs of more than one APT group.
 
-### 3.1 APT28 - create layer, set color coding, and insert scoring
+### 3.1 APT groups - create layer, set color coding, and insert scoring
 
   -  Go to https://attack.mitre.org/
   -  Go to Resources and click "ATT&CK Data and Tools".
@@ -102,13 +102,13 @@
 
   *Create new layer for APT group.*
 
-  -  Once inside the Navigator tool, click "Selection Layer", click search icon, and search APT 28.
+  -  Once inside the Navigator tool, click "Selection Controls", click search icon, and search APT 28.
   
   ![Search APT groups.](./screenshot/3.2%20Search%20APT%20group..jpg)
 
   *Search APT groups.*
       
-  -  Under "Threat Groups", click "select" beside APT28. Notice that the techniques will be highlighted.
+  -  Under "Threat Groups", click "select" beside APT28. Notice that the techniques will be highlighted on the left panel.
   
   ![Select APT group.](./screenshot/3.3%20Select%20APT%20group.jpg)
   
@@ -132,9 +132,12 @@
       
   *Set color value.*
   
-    > Note: In terms of putting score to the color coding, since we are comparing 3 APT groups; `1 = there is only one TTP present in all APT groups`, `2 = there are two TTP present in all APT groups`, `3 = these are the common/similar TTP in all APT groups`.
+    > Note: In terms of putting score to the color coding, since we are comparing 3 APT groups; 
+      - `1 = there is only one TTP present in all APT groups` 
+      - `2 = there are two TTP present in all APT groups` 
+      - `3 = these are the common/similar TTP in all APT groups`
 
-  - To insert the score, go to "Technique Controls", click scoring icon, and put 1. Notice that TTP are now in color red.
+  - To insert the score, go to "Technique Controls", click scoring icon, and put 1. Notice in the left panel that TTP are now in color red.
     
   ![Scoring of APT group.](./screenshot/3.6%20Scoring%20of%20APT%20group..jpg)
     
