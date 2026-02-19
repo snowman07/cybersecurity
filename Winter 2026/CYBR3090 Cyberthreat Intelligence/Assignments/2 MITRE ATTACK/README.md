@@ -19,6 +19,7 @@
   - [2.6 MITRE ATT\&CK mapping](#26-mitre-attck-mapping)
 - [3 Mapping several adversaries (APT28, APT29, APT39) on MITRE ATT\&CK Navigator](#3-mapping-several-adversaries-apt28-apt29-apt39-on-mitre-attck-navigator)
   - [3.1 APT28 - create layer, set color coding, and insert scoring](#31-apt28---create-layer-set-color-coding-and-insert-scoring)
+- [*TTP of APT28 group.*](#ttp-of-apt28-group)
   - [3.2 Combining all APT group into single layer](#32-combining-all-apt-group-into-single-layer)
 - [Useful Links](#useful-links)
 - [References](#references)
@@ -103,50 +104,56 @@
   *Create new layer for APT group.*
 
   -  Once inside the Navigator tool, click "Selection Layer", click search icon, and search APT 28.
-    ![Search APT groups.](./screenshot/3.2%20Search%20APT%20group..jpg)
+  
+  ![Search APT groups.](./screenshot/3.2%20Search%20APT%20group..jpg)
 
-      *Search APT groups.*
+  *Search APT groups.*
       
   -  Under "Threat Groups", click "select" beside APT28. Notice that the techniques will be highlighted.
-    ![Select APT group.](./screenshot/3.3%20Select%20APT%20group.jpg)
-    
-      *Select APT group.*
+  ![Select APT group.](./screenshot/3.3%20Select%20APT%20group.jpg)
+  
+  *Select APT group.*
 
   - To rename the APT group, go to "Layer Controls", click "layer settings".
-    ![Naming the layer.](./screenshot/3.7%20Naming%20the%20layer..jpg)
+  
+  ![Naming the layer.](./screenshot/3.7%20Naming%20the%20layer..jpg)
     
-      *Naming the layer.*
+  *Naming the layer.*
 
   -  To set the color coding, go to "Layer Controls", click "color setup".
-    ![Color setup.](./screenshot/3.4%20Color%20setup.jpg)
     
-      *Color setup.*
+  ![Color setup.](./screenshot/3.4%20Color%20setup.jpg)
+    
+  *Color setup.*
 
   - Set the "Low Value" to 1 and "High Value" to 3. 
       
-    ![](./screenshot/3.5%20Set%20color%20value.jpg)
+  ![](./screenshot/3.5%20Set%20color%20value.jpg)
       
-      *Set color value.*
+  *Set color value.*
   
     >`Note:` In terms of putting score to the color coding, since we are comparing 3 APT groups; `1 = there is only one TTP present in all APT groups`, `2 = there are two TTP present in all APT groups`, `3 = these are the common/similar TTP in all APT groups`.
 
   - To insert the score, go to "Technique Controls", click scoring icon, and put 1. Notice that TTP are now in color red.
     
-    ![Scoring of APT group.](./screenshot/3.6%20Scoring%20of%20APT%20group..jpg)
+  ![Scoring of APT group.](./screenshot/3.6%20Scoring%20of%20APT%20group..jpg)
     
-      *Scoring of APT group.*
+  *Scoring of APT group.*
 
   - To add another separate layer of TTP for APT29 and APT39, click the plus icon.
-    ![Create new layer.](./screenshot/3.9%20Create%20new%20layer.jpg)
-    *Create new layer*
+    
+  ![Create new layer.](./screenshot/3.9%20Create%20new%20layer.jpg)
+  
+  *Create new layer*
+
   - Repeat the process to `Search APT group` until `Scoring of APT group`.
   - At this point, there should be 3 layers, namely; APT28, APT29, and APT39.
   - 
   - For TTP of the three APT groups, below are the SVG file downloaded for APT28, APT29, and APT39 respectively.
 
-    ![TTP of APT28 group.](./screenshot/3.8%20TTP%20of%20APT28%20group..svg)
+  ![TTP of APT28 group.](./screenshot/3.8%20TTP%20of%20APT28%20group..svg)
     
-      *TTP of APT28 group.*
+  *TTP of APT28 group.*
   - 
 
 ### 3.2 Combining all APT group into single layer
