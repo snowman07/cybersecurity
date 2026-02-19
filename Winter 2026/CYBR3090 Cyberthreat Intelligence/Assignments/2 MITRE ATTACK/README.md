@@ -97,9 +97,10 @@
   -  Under ATT&CK Navigator, click "Open Application".
   -  Click "Create New Layer".
   -  Click "Enterprise ATT&CK".
-![Create new layer for APT group.](./screenshot/3.1%20create%20layer.jpg)
+  
+    ![Create new layer for APT group.](./screenshot/3.1%20create%20layer.jpg)
 
-  *Create new layer for APT group.*
+      *Create new layer for APT group.*
 
   -  Once inside the Navigator tool, click "Selection Layer", click search icon, and search APT 28.
     ![Search APT groups.](./screenshot/3.2%20Search%20APT%20group..jpg)
