@@ -273,28 +273,320 @@ The access error is mainly because NAT is not yet configured. So, for simplicity
 
 ### 4.1 Network reconnaissance using Zenmap
 
+Zenmap is the graphical user interface (GUI) for Nmap that provides a user-friendly interface for tasks like discovering active devices/hosts, identifying open ports, and finding vulnerabilities without requiring extensive command-line knowledge. It is a powerful tool in the context of the network and transport layers, as they are reconnaissance techniques used as critical initial steps to a more malicious activity. It also helps in identifying the operating systems and application/service versions that can be exploited in the later stages of an attack.
+
+As a result of the network scan with zenmap, the information gathered will be used to plan and execute more damaging actions like denial-of-service (DOS) attacks, data breaches, etc. For example, an attacker might discover an open port for a specific version of a service and then use a known exploit for that vulnerability.
+
 ### 4.2 ICMP Ping Flood Attack
+
+ICMP ping flood attack is a form of Distributed Denial-of-Service (DDoS) attack in which an attacker floods the recipient device by overwhelming it with ICMP echo requests, also known as pings. Essentially, Internet Control Message Protocol (ICMP) ping requests are used to check for connectivity and the health of networking devices. In a legitimate ICMP ping, the recipient device replies to an ICMP echo request. The response indicates the health of the recipient.
+
+The goal of ICMP ping flood attack is to consume the target’s network bandwidth and/or processing capacity so legitimate traffic or services are disrupted or slowed. These attacks can 24
+severely disrupt an organization’s online network operations, compromise the security of the cloud or local infrastructure, and make services unavailable to legitimate users. The resulting service disruptions and outages can significantly impact businesses, particularly those that rely heavily on online services.
 
 ## 5 Test Results (before and after scenarios)
 
 ### 5.1a Before the actual cyber-attack, perform network reconnaissance using Zenmap
 
+- Click Kali Linux icon and type “zenmap”.
+- Type “cisco” as the password and click “Authenticate” to open up zenmap.
+
+![Figure 28. Zenmap is a tool used to do network reconnaissance.](./screenshots/4%20layer%203%20attack%20using%20zenmap/1%20zenmap.jpg)
+
+*Figure 28. Zenmap is a tool used to do network reconnaissance.*
+
+- On a real cyber-attack scenario, once you are connected to a network, you will get an idea of what range of IP addresses to scan. For this purpose, put IP address network range which is “192.168.0.0-250” on “Target”.
+- On “Profile”, choose “Quick Scan”.
+- Click “Scan” to quickly see what is in the network, figure out more information of what hosts are active, and from there, it is possibly the launch of further attack.
+
+![Figure 29. Result of Zenmap scan where 3 active hosts were found.](./screenshots/4%20layer%203%20attack%20using%20zenmap/2%20zenmap%20scan%20result.jpg)
+
+*Figure 29. Result of Zenmap scan where 3 active hosts were found.*
+
 ### 5.1b After the successful network reconnaissance using Zenmap
+
+- From those active hosts, choose one IP address to scan in order to get more information. This time, choose “Intense Attack” on Profile and click Scan.
+
+![Figure 30. Result of Zenmap scan for specific host, which is a successful cyber-attack.](./screenshots/4%20layer%203%20attack%20using%20zenmap/3%20zenmap%20scan%20result%20for%20specific%20host.jpg)
+
+*Figure 30. Result of Zenmap scan for specific host, which is a successful cyber-attack.*
+
+- At this point in time, the attacker achieves the ultimate objective of network reconnaissance which is to gather more information about a target’s network and plan an effective strategy for future cyber-attack.
 
 ### 5.2a Before ICMP Ping Flood Attack
 
+In this attack, FortiGate firewall (FW01) is the target, and Kali Linux is the attacker. Kali Linux will basically send hundreds of packets to flood FortiGate firewall.
+
+![Figure 31. Visual representation of ICMP Ping flood attack.](./screenshots/7%20icmp%20ping%20flood%20attack/1%20attacker%20and%20target.jpg)
+
+*Figure 31. Visual representation of ICMP Ping flood attack.*
+
+- Open the terminal in Kali Linux.
+- Type “arp -a” to display the gateway of VLAN10 in FortiGate firewall (FW01).
+- Ping the gateway to check the connection.
+
+![Figure 32. Kali Linux can communicate on 192.168.10.1 which is the gateway of VLAN10 in FortiGate firewall.](./screenshots/7%20icmp%20ping%20flood%20attack/2%20kali%20pinging%20gateway%20of%20firewall.jpg)
+
+*Figure 32. Kali Linux can communicate on 192.168.10.1 which is the gateway of VLAN10 in FortiGate firewall.*
+
+- Verify the gateway of VLAN10 in FortiGate firewall (FW01) GUI.
+
+![Figure 33. This is the gateway of VLAN10 in FortiGate firewall.](./screenshots/7%20icmp%20ping%20flood%20attack/3%20verify%20gateway%20of%20FortiGate%20firewall.jpg)
+
+*Figure 33. This is the gateway of VLAN10 in FortiGate firewall.*
+
+- Still in firewall (FW01) GUI, click “Dashboard” then click “Status” to monitor the current CPU usage.
+
+![Figure 34. Before the ICMP ping flood attack, the CPU usage of the firewall is currently ranging from 5%.](./screenshots/7%20icmp%20ping%20flood%20attack/4%20cpu%20usage%20before%20attack.jpg)
+
+*Figure 34. Before the ICMP ping flood attack, the CPU usage of the firewall is currently ranging from 5%.*
+
 ### 5.2b After ICMP Ping Flood Attack
+
+- To perform the ICMP ping flood attack on the firewall, go to Kali Linux terminal and type “sudo ping -f -i 0.01 192.168.10.1” and press enter. Where “-f” is flood, “-i 0.01” is the 10-millisecond time interval, and 192.168.10.1 is the gateway of VLAN10 in FortiGate.
+
+![Figure 35. Command for ICMP ping flood attack.](./screenshots/8%20icmp%20ping%20flood%20after/1%20command%20for%20icmp%20ping%20attack.jpg)
+
+*Figure 35. Command for ICMP ping flood attack.*
+
+- While running the ICMP ping flood attack, monitor the packet capture in firewall (FW01) GUI:
+  - Click “Network”.
+  - Click “Diagnostics”.
+  - Click “New packet capture” to add new one.
+  - On “Interface”, choose the VLAN where you want to capture the packets. In this case, choose HR (VLAN10).
+  - Put a name.
+  - On “Maximum captured packets”, put 1000 or depends on the requirement.
+  - Finally, click “Start Capture”.
+
+  ![Figure 36. This is monitoring tool for ICMP ping flood attack. As you can see, it is currently
+capturing 590 packets, and it will keep on adding up.](./screenshots/8%20icmp%20ping%20flood%20after/2%20monitor%20vlan10.jpg)
+
+  *Figure 36. This is monitoring tool for ICMP ping flood attack. As you can see, it is currently
+capturing 590 packets, and it will keep on adding up.*
+
+- Check the status of CPU current usage.
+
+![Figure 37. While ICM ping flood attack is on-going, there is a spike in CPU usage. As seen here,
+the current usage is 41%.](./screenshots/8%20icmp%20ping%20flood%20after/3%20cpu%20usage%20after%20attack.jpg)
+
+*Figure 37. While ICM ping flood attack is on-going, there is a spike in CPU usage. As seen here,
+the current usage is 41%.*
+
+- As an alternative in checking the packet capture:
+  - Go to CML.
+  - Right click on the connection between switch and firewall.
+  - Click “Packet Capture”.
+  
+  ![Figure 38. Another way in checking packet capture while running the ICMP ping flood attack.](./screenshots/8%20icmp%20ping%20flood%20after/4%20monitor%20vlan%20in%20cml%20itself.jpg)
+
+  *Figure 38. Another way in checking packet capture while running the ICMP ping flood attack.*
 
 ## 6 Prevention and Mitigation
 
 ### 6.1 Implementation of VLAN as protection to network reconnaissance using Zenmap
 
+Virtual Local Area Network (VLAN) is a logical segmentation that enables devices to be grouped together regardless of their physical location, isolating the traffic for each group. By partitioning a single physical network into multiple broadcast domains, VLANs improve security,
+performance, flexibility, and manageability.
+
+To prevent and mitigate from getting information of the entire network via Zenmap, the solution is to configure VLAN so that every device will be grouped and cannot be on the same network. VLAN configuration is done both on the switch (6.1.1) and on the firewall (6.1.2).
+
 #### 6.1.1 VLAN configuration in switch
+
+- On the switch console, type “enable”.
+- Type “config” to configure the switch.
+- Press enter when ask “Configure from terminal?”.
+- Inside the switch config, type “vlan 10” and press enter.
+- Type “name HR” to put a name on vlan 10 and press enter.
+- Add another vlan which is “vlan 20” and press enter.
+- Type “name IT” and press enter.
+- Another vlan which is “vlan 30” and press enter.
+- Type “name Finance” and press enter.
+
+![Figure 39. VLAN configuration in the switch.](./screenshots/5%20mitigation%20via%20vlan/1%20vlan%20setup.jpg)
+
+*Figure 39. VLAN configuration in the switch.*
+
+- Type “exit” and press enter.
+- Type “exit” and press enter.
+- Type “show vlan” to show lists of existing vlan.
+
+![Figure 40. Trunk port is used to connect switches and routers/firewall, transmitting data from multiple VLANs simultaneously. Access port connects virtual machines to a switch or VLAN, transmitting data within a single VLAN.](./screenshots/5%20mitigation%20via%20vlan/2%20vlan%20trunk%20and%20access%20port.jpg)
+
+*Figure 40. Trunk port is used to connect switches and routers/firewall, transmitting data from
+multiple VLANs simultaneously. Access port connects virtual machines to a switch or VLAN,
+transmitting data within a single VLAN.*
+
+- Trunk port configuration (e0/0)
+  - Type “configure terminal” and press enter.
+  - Type “int e0/0” and press enter.
+  - Type “switchport trunk encapsulation dot1q” and press enter.
+  - Type “switchport mode trunk” and press enter.
+
+  ![Figure 41. Commands in switch console to configure trunk port.](./screenshots/5%20mitigation%20via%20vlan/3%20trunk%20port%20config.jpg)
+
+  *Figure 41. Commands in switch console to configure trunk port.*
+
+- Access port configuration (e0/1, e0/2, e0/3)
+  - In the same switch configuration, type “int e0/1” and press enter.
+  - Type “switchport mode access” and press enter.
+  - Type “switchport access vlan 10” and press enter.
+
+  ![Figure 42. Commands in switch console to configure access port of e0/1.](./screenshots/5%20mitigation%20via%20vlan/4%20e01%20access%20port%20config.jpg)
+
+  *Figure 42. Commands in switch console to configure access port of e0/1.*
+
+  - For e0/2, type “int e0/2” and press enter.
+  - Type “switchport mode access” and press enter.
+  - Type “switchport access vlan 20” and press enter.
+
+  ![Figure 43. Commands in switch console to configure access port of e0/2.](./screenshots/5%20mitigation%20via%20vlan/5%20e02%20access%20port%20config.jpg)
+
+  *Figure 43. Commands in switch console to configure access port of e0/2.*
+
+  - For e0/3, type “int e0/3” and press enter.
+  - Type “switchport mode access” and press enter.
+  - Type “switchport access vlan 30” and press enter.
+
+  ![Figure 44. Commands in switch console to configure access port of e0/3.](./screenshots/5%20mitigation%20via%20vlan/6%20e03%20access%20port%20config.jpg)
+
+  *Figure 44. Commands in switch console to configure access port of e0/3.*
+
+  - Type “exit” and press enter.
+  - Type “exit” and press enter.
+  - Type “show vlan” and press enter to show lists of vlan.
+
+![Figure 45. Show lists of VLAN after the configuration.](./screenshots/5%20mitigation%20via%20vlan/7%20show%20vlan%20after%20config.jpg)
+
+*Figure 45. Show lists of VLAN after the configuration.*
+
+- Finally, type “write” and press enter to save the configuration made.
 
 #### 6.1.2 VLAN configuration in firewall
 
+- Go back to the firewall (FW01) GUI and click “Network” then “Interfaces”. Go specifically on port 2. On “IP/Netmask”, remove the existing IP and replace it with “0.0.0.0/0”. Disable “DHCP Server” as well. Press OK. This is like going back to the basic LAN.
+- Next step is to create 3 different virtual interfaces under port 2 that talk to each VLANs created in switch. On the left panel of firewall (FW01) GUI, go to “Network” and click “Interfaces”.
+- Click “Create New” and click on “Interface”.
+- On “New Interface” window, put “VLAN10” under “Name” (others are VLAN20 and
+VLAN30).
+- “Alias” is “HR” (IT for VLAN20; Finance for VLAN30).
+- “Type” is “VLAN”.
+- “VLAN protocol” is “802.1Q”.
+- In “Interface”, choose “LAN(port2)”.
+- “VLAN ID” is “10” (“20” for VLAN20; "30” for VLAN30).
+- Click “Manual” in the “Addressing mode”.
+- “IP/Netmask” is “192.168.10.1/24” (192.168.20.1/24 for VLAN20; 192.168.30.1/24 for
+VLAN30).
+- Check “PING” on IPv4.
+- Enable “DHCP Server”.
+- Put “192.168.10.50-192.168.10.200” in the “Address range” (192.168.20.50-
+192.168.20.200 for VLAN20; 192.168.30.50-192.168.30.200 for VLAN30).
+- Click OK.
+- Repeat the process for VLAN20 and VLAN30.
+
+![Figure 46. VLAN 10 (HR) configuration.](./screenshots/6%20firewall%20config%20with%20vlan%20switch/1a%20new%20interface%20vlan%2010.jpg)
+
+*Figure 46. VLAN 10 (HR) configuration.*
+
+![Figure 47. VLAN 20 (IT) configuration.](./screenshots/6%20firewall%20config%20with%20vlan%20switch/2%20new%20interface%20vlan%2020.jpg)
+
+*Figure 47. VLAN 20 (IT) configuration.*
+
+![Figure 48. VLAN 30 (Finance) configuration.](./screenshots/6%20firewall%20config%20with%20vlan%20switch/3%20new%20interface%20vlan%2030.jpg)
+
+*Figure 48. VLAN 30 (Finance) configuration.*
+
+![Figure 49. These are the 3 VLANs created.](./screenshots/6%20firewall%20config%20with%20vlan%20switch/4%203%20vlans%20created.jpg)
+
+*Figure 49. These are the 3 VLANs created.*
+
+- Verify if client machines have the VLAN configured.
+
+![Figure 50. The IP address of VLAN30 is 192.168.30.50](./screenshots/6%20firewall%20config%20with%20vlan%20switch/5%20verify%20vlan30%20correct%20IP.jpg)
+*Figure 50. The IP address of VLAN30 is 192.168.30.50*
+
+![Figure 51. The IP address of VLAN20 is 192.168.20.50](./screenshots/6%20firewall%20config%20with%20vlan%20switch/6%20verify%20vlan20%20correct%20IP.jpg)
+*Figure 51. The IP address of VLAN20 is 192.168.20.50*
+
+![Figure 52. The IP address of VLAN10 is 192.168.10.50](./screenshots/6%20firewall%20config%20with%20vlan%20switch/7%20verify%20vlan10%20correct%20IP.jpg)
+*Figure 52. The IP address of VLAN10 is 192.168.10.50*
+
+- At this point, VLAN is now in place. It means VLAN10, VLAN20, and VLAN30 cannot communicate with each other anymore.
+
+![Figure 53. No response from other VLAN means that the network is properly segmented/isolated.](./screenshots/6%20firewall%20config%20with%20vlan%20switch/8%20no%20response%20from%20other%20vlan.jpg)
+*Figure 53. No response from other VLAN means that the network is properly segmented/isolated.*
+
 ### 6.2 Implementation to prevent and mitigate ICMP ping flood attack
+
+- Go to firewall (FW01) GUI.
+- Click “Policy and Objects” and “DoS Policy”.
+- Click “Create new”.
+- Put a descriptive “Name” (Block ICMP flood VLAN10, etc).
+- On “Incoming Interface”, choose the VLAN (VLAN10, VLAN20, VLAN30).
+- “Source Address” is “all”.
+- “Destination Address” is “all”.
+- “Service” is “ALL”.
+
+![Figure 54. Initial steps for ICMP ping flood mitigation](./screenshots/10%20icmp%20mitigation/1%20first%20step%20in%20ICMP%20ping%20flood%20mitigation.jpg)
+*Figure 54. Initial steps for ICMP ping flood mitigation*
+
+- Scroll down and look for “icmp_flood”. Click “Block” button.
+- Press OK.
+
+![Figure 55. Setting up DoS policy for each VLAN.](./screenshots/10%20icmp%20mitigation/2%20icmp%20flood%20mitigation%20for%20vlan.jpg)
+*Figure 55. Setting up DoS policy for each VLAN.*
+
+- Repeat the process for VLAN20 and VLAN30.
+
+![Figure 56. Lists of DoS Policy to block ICMP ping flood for VLAN10, VLAN20, and VLAN30.](./screenshots/10%20icmp%20mitigation/3%20Lists%20of%20DoS%20Policy.jpg)
+*Figure 56. Lists of DoS Policy to block ICMP ping flood for VLAN10, VLAN20, and VLAN30.*
+
+- While running the ICMP ping flood attack in Kali Linux terminal (sudo ping -f -i 0.01 192.168.10.1), verify the current CPU Usage by going to the “Dashboard” and “Status”.
+
+![Figure 57. The current CPU usage is 0% after the implementation of Block ICMP flood in DoS Policy. This means that whenever ICMP ping exceed the threshold set in DoS policy, the DoS policy will block it.](./screenshots/10%20icmp%20mitigation/4%20cpu%20usage%20after%20mitigation.jpg)
+*Figure 57. The current CPU usage is 0% after the implementation of Block ICMP flood in DoS Policy. This means that whenever ICMP ping exceed the threshold set in DoS policy, the DoS policy will block it.*
 
 ## References
 
 [What is OSI Model?](https://www.realpars.com/blog/osi)
+
+Difference Between Trunk Port and Access Port. (2025, July 23). Retrieved from Geeks for Geeks:
+https://www.geeksforgeeks.org/computer-networks/difference-between-trunk-port-andaccess-
+port/
+
+Etheridge, E. (n.d.). Access Control List (ACL) in cyber security: Beneficial for all, critical for some.
+Retrieved from DataGuard: https://www.dataguard.com/blog/acl-access-control-list/
+
+Fortinet. (n.d.). Configure a Firewall Policy for a PC to Access Internet | FortiGate. Retrieved from
+Youtube: https://www.youtube.com/watch?v=36wU22YqrGw
+
+Hess, K. (n.d.). Scanning with Zenmap. Retrieved from Linux Magazine: https://www.linuxmagazine.
+com/Online/Features/Scanning-with-Zenmap
+
+Lutkevich, B. (2021, October 1). IP spoofing. Retrieved from TechTarget:
+https://www.techtarget.com/searchsecurity/definition/IP-spoofing
+
+NAT Explained: What It Is and Why It's Important in Networking. (n.d.). Retrieved from Nitiz Sharma:
+https://nitizsharma.com/nat-explained-in-networking/
+
+Operations, N. (n.d.). Deep Packet Analysis Ep4 - ICMP PING FLOOD + FortiGate Firewall Part 1. Retrieved
+from YouTube: https://www.youtube.com/watch?v=vegnSkRNMJs
+
+Operations, N. (n.d.). Deep Packet Analysis Ep5 - IPv4 DOS POLICY + FORTIGATE FIREWALL PART 2.
+Retrieved from YouTube: https://www.youtube.com/watch?v=bYM3lWzqPwI&list=PL12zYfEwh5q_yDEcQyzSa87pxwZq2rrw&index=14
+
+Raza, M. (2025, June 18). Deep Packet Inspection (DPI) Explained: OSI Layers, Real-World Applications &
+Ethical Considerations. Retrieved from Splunk:
+https://www.splunk.com/en_us/blog/learn/deep-packet-inspectiondpi.html#:~:text=What%20is%20deep%20packet%20inspection,might%20violate%20specific%20filtering%20rules.
+
+Saroyan, K. (n.d.). What Is Access Control List (ACL) & Importance? Retrieved from Impanix:
+https://impanix.com/security/access-control-listacl/#:~:text=and%20security%20requirements.-,What%20Are%20The%20Disadvantages,access%20control%20across%20interconnected%20systems.
+
+What Is A Ping (ICMP) Flood DDOS Attack? (n.d.). Retrieved from radware:
+https://www.radware.com/security/ddos-knowledge-center/ddospedia/icmpflood/#WhatIsAPingFloodAttack
+
+What is a Ping Flood Attack? (n.d.). Retrieved from Akamai: https://www.akamai.com/glossary/what-isa-ping-flood-attack
+
+What is a SYN flood attack? (n.d.). Retrieved from fastly: https://www.fastly.com/learning/bots/what-isa-syn-floodattack#:~:text=A%20SYN%20flood%20attack%20overwhelms,struggles%20with%20pending%2C%20incomplete%20connections.
+
+What is an IP Address? (2025, October 7). Retrieved from GeeksforGeeks:
+https://www.geeksforgeeks.org/computer-science-fundamentals/what-is-an-ip-address/
