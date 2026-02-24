@@ -53,6 +53,7 @@ In this diagram, switch’s port e0/1 is where Kali Linux is connected with MAC 
 
 To be more precise, check the table below.
 
+*Table 1. Tabular representation of Virtual Machines with the corresponding MAC Address Table.*
 | Virtual Machine | VLAN | MAC Address | Type | Ports |
 |----------|----------|----------|----------|----------|
 | Kali Linux  | 1  | 5254.0000.85e3  | Dynamic  | E0/1  |
