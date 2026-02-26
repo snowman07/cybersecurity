@@ -35,7 +35,7 @@
 
 ## 1 Introduction
 
-This document is about Layer 3 and Layer 4 of the OSI Layer, which is the Network Layer (IP and ICMP are the common protocols) and Transport Layer (TCP and UDP are the common protocols). It is in Layer 3 where routing, packet forwarding, and logical addressing happens with the use of an IP address; hence this document will cover on how to configure IP addresses statically and dynamically through enabling Dynamic Host Control Protocol (DHCP) on a firewall. For Layer 4, Transport layer ensures the reliable and efficient data delivery through segmentation; hence this document will cover the configuration of VLAN on the firewall and on the switch to segment the network for better traffic control and security. Moreover, this document will go through the configuration of NAT to allow VMs to access the internet. Finally, network layer and transport layer are prone to cyberattacks. Therefore, this document will tackle the vulnerabilities and potential impact associated with this layer, compare results before and after the attack, and apply security measures to mitigate these vulnerabilities effectively.
+This document is about Layer 3 and Layer 4 of the OSI (Open Systems Interconnection) Model, which is the Network Layer (IP and ICMP are the common protocols) and Transport Layer (TCP and UDP are the common protocols). It is in Layer 3 where routing, packet forwarding, and logical addressing happens with the use of an IP address; hence this document will cover on how to configure IP addresses statically and dynamically through enabling Dynamic Host Control Protocol (DHCP) on a firewall. For Layer 4, Transport layer ensures the reliable and efficient data delivery through segmentation; hence this document will cover the configuration of VLAN on the firewall and on the switch to segment the network for better traffic control and security. Moreover, this document will go through the configuration of NAT to allow VMs to access the internet. Finally, network layer and transport layer are prone to cyberattacks. Therefore, this document will tackle the vulnerabilities and potential impact associated with this layer, compare results before and after the attack, and apply security measures to mitigate these vulnerabilities effectively.
 
 ## 2 Network Diagram
 
@@ -502,17 +502,21 @@ VLAN30).
 - Verify if client machines have the VLAN configured.
 
 ![Figure 50. The IP address of VLAN30 is 192.168.30.50](./screenshots/6%20firewall%20config%20with%20vlan%20switch/5%20verify%20vlan30%20correct%20IP.jpg)
+
 *Figure 50. The IP address of VLAN30 is 192.168.30.50*
 
 ![Figure 51. The IP address of VLAN20 is 192.168.20.50](./screenshots/6%20firewall%20config%20with%20vlan%20switch/6%20verify%20vlan20%20correct%20IP.jpg)
+
 *Figure 51. The IP address of VLAN20 is 192.168.20.50*
 
 ![Figure 52. The IP address of VLAN10 is 192.168.10.50](./screenshots/6%20firewall%20config%20with%20vlan%20switch/7%20verify%20vlan10%20correct%20IP.jpg)
+
 *Figure 52. The IP address of VLAN10 is 192.168.10.50*
 
 - At this point, VLAN is now in place. It means VLAN10, VLAN20, and VLAN30 cannot communicate with each other anymore.
 
 ![Figure 53. No response from other VLAN means that the network is properly segmented/isolated.](./screenshots/6%20firewall%20config%20with%20vlan%20switch/8%20no%20response%20from%20other%20vlan.jpg)
+
 *Figure 53. No response from other VLAN means that the network is properly segmented/isolated.*
 
 ### 6.2 Implementation to prevent and mitigate ICMP ping flood attack
@@ -527,22 +531,26 @@ VLAN30).
 - “Service” is “ALL”.
 
 ![Figure 54. Initial steps for ICMP ping flood mitigation](./screenshots/10%20icmp%20mitigation/1%20first%20step%20in%20ICMP%20ping%20flood%20mitigation.jpg)
+
 *Figure 54. Initial steps for ICMP ping flood mitigation*
 
 - Scroll down and look for “icmp_flood”. Click “Block” button.
 - Press OK.
 
 ![Figure 55. Setting up DoS policy for each VLAN.](./screenshots/10%20icmp%20mitigation/2%20icmp%20flood%20mitigation%20for%20vlan.jpg)
+
 *Figure 55. Setting up DoS policy for each VLAN.*
 
 - Repeat the process for VLAN20 and VLAN30.
 
 ![Figure 56. Lists of DoS Policy to block ICMP ping flood for VLAN10, VLAN20, and VLAN30.](./screenshots/10%20icmp%20mitigation/3%20Lists%20of%20DoS%20Policy.jpg)
+
 *Figure 56. Lists of DoS Policy to block ICMP ping flood for VLAN10, VLAN20, and VLAN30.*
 
 - While running the ICMP ping flood attack in Kali Linux terminal (sudo ping -f -i 0.01 192.168.10.1), verify the current CPU Usage by going to the “Dashboard” and “Status”.
 
 ![Figure 57. The current CPU usage is 0% after the implementation of Block ICMP flood in DoS Policy. This means that whenever ICMP ping exceed the threshold set in DoS policy, the DoS policy will block it.](./screenshots/10%20icmp%20mitigation/4%20cpu%20usage%20after%20mitigation.jpg)
+
 *Figure 57. The current CPU usage is 0% after the implementation of Block ICMP flood in DoS Policy. This means that whenever ICMP ping exceed the threshold set in DoS policy, the DoS policy will block it.*
 
 ## References
