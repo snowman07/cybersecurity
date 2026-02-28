@@ -266,7 +266,8 @@ Remember that Client VM 1 (VLAN 10) has access to Client VM 2 (VLAN 20) and the 
 •	In VLAN20, it should be able to:
   -	ping 8.8.8.8 (internet)
   -	ping 192.168.20.1 (VLAN20 own default gateway)
-  And NOT be able to ping:
+
+    And NOT be able to ping:
   -	ping 192.168.10.1 (VLAN10 default gateway)
   -	ping 192.168.10.51 (VLAN 10 IP)
 
@@ -305,7 +306,8 @@ Per requirement, Client VM 3 (VLAN 30) is connected to a SPAN port, capturing tr
 ## 6 Packet Analysis 
 
 This section will cover different traffic capture points in the network such as TCP three-way handshake, TCP four-way teardown, and TTL.
-	To initiate traffic:
+
+To initiate traffic:
 
 •	Start the three VM (VLAN10, VLAN20, VLAN30) simultaneously.
 
@@ -333,33 +335,144 @@ This section will cover different traffic capture points in the network such as 
 *Figure 27. Wireshark in VLAN30 generated 91,546 packets.*
 
 ### 6.1 TCP three-way handshake
-
+The TCP three-way handshake is a process used by a client and server to establish a reliable connection by exchanging three packets: SYN (Synchronize), SYN-ACK (Synchronize-Acknowledge), and ACK (Acknowledge). The first machine sends a SYN packet, the second responds with a SYN/ACK packet, and the first replies with an ACK packet, allowing for normal communication.
 
 #### 6.1.a Identify the packets in the complete TCP three-way handshake process. 
+This is the packet capture in Client VM 1 (VLAN 10) where VLAN 10 can communicate to VLAN 20.
+
+![Figure 28. TCP three-way handshake captured in VLAN10.](./screenshots/7%20packet%20analysis/tcp%20three-way%20handshake/1%20three%20way%20in%20vm1.jpg)
+
+*Figure 28. TCP three-way handshake captured in VLAN10.*
+
+Below is the TCP three-way handshake captured in Client VM 3 (VLAN 30) where SPAN (Switch Port ANalyzer) is implemented. 
+
+![Figure 29. TCP three-way handshake captured on VLAN30 where SPAN is implemented.](./screenshots/7%20packet%20analysis/tcp%20three-way%20handshake/2%20three%20way%20in%20vm3.jpg)
+
+*Figure 29. TCP three-way handshake captured on VLAN30 where SPAN is implemented.*
 
 #### 6.1.b Provide a brief description of the TCP three-way handshake process and explain how you identified the packets captured as being part of the same TCP conversation.
+The TCP three-way handshake is the process used to establish a reliable connection.
+1.	SYN (Synchronize): sender/client initiates session.
+2.	SYN-ACK (Synchronize - Acknowledge):  receiver/server respond to acknowledge the client’s request.
+3. ACK (Acknowledge): sender/client replies completing the connection.
+
+These three together is the TCP three-way handshake. I identified these three packets by filtering for “tcp.flags.syn == 1 || tcp.flags.ack == 1” and matching the same source and destination IP addresses and ports. The sequence numbers (628, 629, 630 in Figure 28 and 417, 418, 419 in Figure 29) confirm that these packets belong to the same TCP session.
 
 #### 6.1.c List and describe the TCP options used in the conversation. 
+To describe the TCP options used in the conversation:
+
+•	Select the SYN packet
+
+•	Below panel, scroll down until you see “Transmission Control Protocol”. Expand “Transmission Control Protocol” by clicking the arrow.
+
+•	Scroll down a little bit more and where you see “Options”, expand by clicking the arrow. 
+
+![Figure 30. Steps to see TCP options.](./screenshots/7%20packet%20analysis/tcp%20three-way%20handshake/3%20steps%20to%20see%20TCP%20options.jpg)
+
+*Figure 30. Steps to see TCP options.*
+
+Below are lists of TCP options:
+
+•	MSS (Maximum Segment Size) - indicates the largest TCP segment (1460 bytes) the sender can receive.
+
+•	SACK Permitted – indicates support for selective acknowledgements, improving performance during packet loss.
+
+•	Timestamps – used for round-trip time measurement and protection against old duplicate packets which improved reliability.
+
+•	NOP (No Operation) – used as padding and does not carry any meaning.
+
+•	Window Scale – multiplies the TCP window size for high-bandwidth networks (scale 7 = ×128).
+
+![Figure 31. Lists of TCP options.](./screenshots/7%20packet%20analysis/tcp%20three-way%20handshake/4%20lists%20of%20tcp%20options.jpg)
+
+*Figure 31. Lists of TCP options.*
 
 
 ### 6.2 TCP four-way teardown
+This is critical for safely closing a TCP connection, ensuring both parties fully release resources and avoid data loss or abnormal termination.
 
 #### 6.2.a Identify the packets in a complete TCP four-way teardown process. 
+To capture the TCP four-way teardown in Wireshark:
+
+•	Start Wireshark and select the correct network interface for capturing.
+
+•	Generate a TCP connection by opening an application that uses a standard TCP connection (e.g., visit a simple website if possible, or use a command-line utility like telnet or ssh).
+
+•	End the connection. The teardown is initiated when one side gracefully closes its session. For a web browser, simply close the browser tab or the entire application window after the page has loaded. For a command-line tool, type the appropriate exit command (e.g., exit in telnet or ssh).
+
+Below screenshot is the packet capture for TCP four-way teardown in VM 1 (VLAN 10). 
+
+![Figure 32. TCP four-way teardown capture in VM 1 (VLAN 10).](./screenshots/7%20packet%20analysis/tcp%20four-way%20teardown/1%20tcp%204%20way%20capture%20in%20VM1.jpg)
+
+*Figure 32. TCP four-way teardown capture in VM 1 (VLAN 10).*
 
 #### 6.2.b Provide a brief description of the TCP four-way teardown process and explain how you identified the packets captured as being part of the same TCP conversation.
+The TCP four-way teardown closes the connection in both directions.
 
+•	Client FIN, ACK (Finish, Acknowledgment): The client sends a packet with the FIN flag set, indicating it wants to close its end of the connection, and an ACK for previously received data.
+
+•	Server ACK (Acknowledgment): The server acknowledges the client's FIN.
+
+•	Server FIN, ACK (Finish, Acknowledgment): The server sends its own FIN, indicating it wants to close its end of the connection, and an ACK for previously received data.
+
+•	Client ACK (Acknowledgment): The client acknowledges the server's FIN, completing the teardown.
+
+These packets were identified using the filter tcp.flags.fin == 1 and verified by matching the same IPs and port numbers in the same TCP stream.
 
 ### 6.3 TTL (Time to Live)
+Time to Live (TTL) is a computer networking term that refers to the lifespan of data on the network. TTL value is a counter that is decremented by 1 every time the packet passes through a router. Once the TTL reaches 0, the router no longer forwards the packet and then drops it. Setting the right TTL value is crucial for optimizing network performance and reliability.
 
 #### 6.3.a Choose an IP packet that is part of communication between the two client VMs.
-
+The IP packet used to communicate between VM 1 (VLAN10) and VM 2 (VLAN20) is ICMP (ping).
  
 #### 6.3.b Apply a display filter to isolate that same packet in all three capture points: Source | Network (SPAN) | Destination
+The display filter used is “ip.src == 192.168.10.51”.
 
 
 #### 6.3.c Provide screenshots from each capture showing: TTL value | Source MAC | Destination MAC | The display filter used
+In a Wireshark capture, the MAC address is found in the Ethernet II layer (Layer 2), and the TTL is found in the Internet Protocol (IP) layer (Layer 3). 
 
+This is the screenshot from VM 1 (VLAN 10):
+
+![Figure 33. Wireshark capture in VM 1 (VLAN 10) for TTL value, Source MAC, Destination MAC, and the display filter used.](./screenshots/7%20packet%20analysis/ttl/1%20ttl%20capture%20on%20vm%201a.jpg)
+
+*Figure 33. Wireshark capture in VM 1 (VLAN 10) for TTL value, Source MAC, Destination MAC, and the display filter used.*
+
+This is the screenshot from VM 2 (VLAN 20): 
+
+![Figure 34. Wireshark capture in VM 2 (VLAN 20) for TTL value, Source MAC, Destination MAC, and the display filter used.](./screenshots/7%20packet%20analysis/ttl/2%20ttl%20capture%20on%20vm%202a.jpg)
+
+*Figure 34. Wireshark capture in VM 2 (VLAN 20) for TTL value, Source MAC, Destination MAC, and the display filter used.*
+
+This is the screenshot from VM 3 (VLAN 30) where SPAN is implemented: 
+
+![Figure 35. Wireshark capture in VM 3 where SPAN (Switch Port ANalyzer) is implemented. ](./screenshots/7%20packet%20analysis/ttl/3%20ttl%20capture%20on%20vm%203a.jpg)
+
+*Figure 35. Wireshark capture in VM 3 where SPAN (Switch Port ANalyzer) is implemented.*
 
 #### 6.3.d Explain the TTL field and the MAC addresses shown, including why they differ between capture points. 
 
+The TTL (Time to Live) field indicates how many routers/firewalls hops a packet can make before being discarded. Each router/firewall that forwards the packet decrements TTL by 1. In this lab, the packet’s TTL decreased by 1 between the source (VM1) and the destination (VM2), showing it passed through the firewall/router.
+
+The MAC addresses differ between capture points because Layer 2 addresses are only valid within a single network segment. Each router rewrites the frame with new source and destination MAC addresses when forwarding packets across VLANs.   
+
 ## References
+
+Danielson, L. (2025, May 20). What is SPAN? A Guide to Understanding Switch Port Analyzer. Retrieved from Huntress: https://www.huntress.com/cybersecurity-101/topics/a-guide-to-span
+
+Dogan, C. (2024, January 2). Steps to troubleshoot with TTL in Wireshark with Examples. Retrieved from GoLinuxCloud: https://www.golinuxcloud.com/troubleshoot-with-ttl-in-wireshark/
+
+Graziani, R. (n.d.). TCP: Terminating the Connection. Retrieved from Youtube: https://www.youtube.com/watch?v=bKQfbkE1Nac&t=1s
+
+InterVLAN Routing. (n.d.). Retrieved from NetworkLessons.com: https://networklessons.com/switching/intervlan-routing
+
+Introduction to TCP four-way handshake. (2025, May 28). Retrieved from Ebyte: https://www.cdebyte.com/news/1097
+
+TCP 3-way Handshake Process. (n.d.). Retrieved from Network Walks: https://networkwalks.com/tcp-3-way-handshake-process/
+
+What is SPAN? A Guide to Understanding Switch Port Analyzer. (2025, May 20). Retrieved from Huntress: https://www.huntress.com/cybersecurity-101/topic/a-guide-to-span
+
+What is Wireshark? (n.d.). Retrieved from sysdig: https://www.sysdig.com/learn-cloud-native/what-is-wireshark#:~:text=Wireshark%20is%20an%20open%2Dsource%20network%20protocol%20analyzer,of%20protocols%2C%20including%20TCP/IP%2C%20HTTP%2C%20and%20DNS
+
+Wireshark. (2024, January 10). Retrieved from TechTarget: https://www.techtarget.com/whatis/definition/Wireshark
+
