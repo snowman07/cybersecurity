@@ -1,4 +1,4 @@
-<h1>Layer 3 and Layer 4 Security</h1>
+<h1 style="color: skyblue; font-size: 55px;">Layer 3 and Layer 4 Security</h1>
 
 ![alt text](packtrav-encap-decap.gif)
 
